@@ -89,7 +89,7 @@ func main() {
 	postLink := flag.String("l", "", "Link on Telegram post for boost views. https://t.me/...")
 	flag.Parse()
 
-	proxies, err := utils.loadProxies(*fileName)
+	proxies, err := utils.LoadProxies(*fileName)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

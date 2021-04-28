@@ -21,7 +21,7 @@ func IsValidURL(inputUrl string) bool {
 	return true
 }
 
-func loadProxies(fileName string) (proxies []string, err error) {
+func LoadProxies(fileName string) (proxies []string, err error) {
 	var body io.Reader
 	// Загрузка прокси из линка и из файла
 	if IsValidURL(fileName) {
