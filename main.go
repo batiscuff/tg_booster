@@ -17,13 +17,14 @@ import (
 )
 
 func addView(proxy string, link string) {
-	// Создание клиента и юзер-агента, добавление таймаута и прокси
+	// Проверка ссылки на пост с телеграм канала
 	if utils.IsValidURL(link) != true {
 		fmt.Println("Invalid post link! Example link: https://t.me/channel_name/1")
 		os.Exit(1)
 	}
 
-	proxyUrl, err := url.Parse(proxy)
+	// Создание клиента и юзер-агента, добавление таймаута и прокси
+	proxyUrl, _ := url.Parse(proxy)
 	ua := browser.Computer()
 	client := &http.Client{
 		Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)},
@@ -32,55 +33,50 @@ func addView(proxy string, link string) {
 
 	// Создание и конфигурация запроса
 	link = link + "?embed=1"
-	request, err := http.NewRequest("GET", link, nil)
-	if err != nil {
-		fmt.Println(err)
-	}
+	request, _ := http.NewRequest("GET", link, nil)
 	request.Header.Set("User-Agent", ua)
 
-	var dataViewString string
+	// Отправка и обработка запроса
 	response, err := client.Do(request)
 	if err != nil {
 		fmt.Println(err)
+		return
+	}
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		fmt.Printf("Error reading HTTP body. %q\n", err)
+		return
+	}
+
+	// Компиляция регулярки и её применение
+	var dataViewString string
+	re := regexp.MustCompile(`data-view="(\w+)"`)
+	if re.Match([]byte(body)) {
+		dataViewString = string(re.FindSubmatch(body)[1])
 	} else {
-		// Вывод инфы в консоль
-		defer response.Body.Close()
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			fmt.Printf("Error reading HTTP body. %q\n", err)
-		}
-
-		// Компиляция регулярки и её применение
-		re := regexp.MustCompile(`data-view="(\w+)"`)
-
-		if re.Match([]byte(body)) {
-			dataViewString = string(re.FindSubmatch(body)[1])
-		}
+		fmt.Println("Data-views not found.")
+		return
 	}
 
-	if response != nil && response.StatusCode == 200 {
-		// Создание и конфигурация запроса
-		request, err = http.NewRequest("GET", "https://t.me/v/?views="+dataViewString, nil)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		if len(response.Cookies()) != 0 {
-			request.AddCookie(response.Cookies()[0])
-		}
-		request.Header.Set("X-Requested-With", "XMLHttpRequest")
-		request.Header.Set("Referer", link)
-		request.Header.Set("User-Agent", ua)
-
-		response, err = client.Do(request)
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			defer response.Body.Close()
-			fmt.Printf("Response status code: %d\n", response.StatusCode)
-		}
-
+	// Configure 2 request
+	request, _ = http.NewRequest("GET", "https://t.me/v/?views="+dataViewString, nil)
+	if len(response.Cookies()) != 0 {
+		request.AddCookie(response.Cookies()[0])
 	}
+	request.Header.Set("X-Requested-With", "XMLHttpRequest")
+	request.Header.Set("Referer", link)
+	request.Header.Set("User-Agent", ua)
+
+	response, err = client.Do(request)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer response.Body.Close()
+
+	fmt.Printf("Views added! [%s] \n", proxy)
 }
 
 func main() {
