@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+    "regexp"
 )
 
 func IsValidURL(inputUrl string) bool {
@@ -19,6 +20,14 @@ func IsValidURL(inputUrl string) bool {
 		return false
 	}
 	return true
+}
+
+func CheckPostLink(link string) bool {
+    re := regexp.MustCompile(`https://t\.me/\w+/\d+`)
+    if re.MatchString(link) {
+        return true
+    }
+    return false
 }
 
 func LoadProxies(fileName string) (proxies []string, err error) {
