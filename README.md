@@ -3,13 +3,16 @@
 
 ## Usage
 ### Install
-sh```git clone https://github.com/batiscuff/tg_booster```
+```sh
+git clone https://github.com/batiscuff/tg_booster
+```
 ### Compile and run
-sh```
+```sh
 git build .
 ./tg_booster -h
 ```
-For example: `./tg_booster -l=https://t.me/python_webscraping/30 -p=https://awmproxy.com/freeproxy_24e8b024452dc01.txt -w=1000`
+For example: `./tg_booster -l=https://t.me/python_webscraping/30 -p=proxies.txt -w=700`
+Recommended workers count(-w) - 500. Maximum workers count - 1100
 
 ## License
 **Copyright © 2021 [batiscuff](https://github.com/batiscuff)** <br />
