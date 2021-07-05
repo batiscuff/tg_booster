@@ -8,7 +8,7 @@ git clone https://github.com/batiscuff/tg_booster
 ```
 ### Compile and run
 ```sh
-git build .
+go build .
 ./tg_booster -h
 ```
 For example: `./tg_booster -l=https://t.me/python_webscraping/30 -p=proxies.txt -w=700`
