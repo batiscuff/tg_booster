@@ -1,5 +1,5 @@
 <h1 align="center">Telegram Booster</h1>
-Boost telegram post views using proxies
+<h2 align="center">Boost telegram post views using proxies</h2>
 
 ## Usage
 ### Install
