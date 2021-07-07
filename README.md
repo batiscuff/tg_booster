@@ -1,7 +1,7 @@
 <h1 align="center">Telegram Booster</h1>
-<h2 align="center">Boost telegram post views using proxies
-  <img src="https://media.giphy.com/media/R8BPMU1uETG3BVKdgR/giphy.gif" />
-</h2>
+<div align="center">
+<img src="https://media.giphy.com/media/R8BPMU1uETG3BVKdgR/giphy.gif" />
+</div>
 
 ## Usage
 ### Install
