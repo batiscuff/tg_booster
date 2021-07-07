@@ -1,6 +1,6 @@
 <h1 align="center">Telegram Booster</h1>
 <h2 align="center">Boost telegram post views using proxies
-  <img src="https://github.com/batiscuff/tg_booster/blob/main/demonstrate.gif" />
+  <img src="https://github.com/batiscuff/tg_booster/blob/main/tg_booster.mp4" />
 </h2>
 
 ## Usage
