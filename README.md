@@ -1,5 +1,7 @@
 <h1 align="center">Telegram Booster</h1>
-<h2 align="center">Boost telegram post views using proxies</h2>
+<h2 align="center">Boost telegram post views using proxies
+![](https://github.com/batiscuff/tg_booster/blob/main/demonstrate.gif)
+</h2>
 
 ## Usage
 ### Install
