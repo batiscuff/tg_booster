@@ -1,5 +1,7 @@
 <h1 align="center">Telegram Booster</h1>
-<h2 align="center">Boost telegram post views using proxies</h2>
+<div align="center">
+<img src="https://media.giphy.com/media/R8BPMU1uETG3BVKdgR/giphy.gif" />
+</div>
 
 ## Usage
 ### Install
@@ -8,7 +10,7 @@ git clone https://github.com/batiscuff/tg_booster
 ```
 ### Compile and run
 ```sh
-git build .
+go build .
 ./tg_booster -h
 ```
 For example: `./tg_booster -l=https://t.me/python_webscraping/30 -p=proxies.txt -w=700`
