@@ -57,7 +57,7 @@ func LoadProxies(fileName string) (proxies []string, err error) {
 			if IsValidURL(line) {
 				lines = append(lines, line)
 			} else {
-				line = "https://" + line
+				line = "http://" + line
 				lines = append(lines, line)
 			}
 		}
